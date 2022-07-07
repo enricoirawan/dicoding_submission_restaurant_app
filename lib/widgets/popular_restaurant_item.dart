@@ -14,12 +14,16 @@ class PopularRestaurantItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return GestureDetector(
       onTap: callback,
       child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: EdgeInsets.all(width <= 320 ? 8 : 10),
+        margin: EdgeInsets.symmetric(
+          horizontal: width <= 320 ? 8 : 16,
+          vertical: 8,
+        ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: Colors.white,
@@ -50,7 +54,7 @@ class PopularRestaurantItem extends StatelessWidget {
                     restaurant.name,
                     style: Theme.of(context).textTheme.headline6!.copyWith(
                           letterSpacing: 1.2,
-                          fontSize: 18,
+                          fontSize: width <= 320 ? 14 : 18,
                           overflow: TextOverflow.ellipsis,
                         ),
                     maxLines: 3,
@@ -61,9 +65,9 @@ class PopularRestaurantItem extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.pin_drop,
-                      size: 16,
+                      size: width <= 320 ? 12 : 16,
                     ),
                     const SizedBox(
                       width: 10,
@@ -84,7 +88,12 @@ class PopularRestaurantItem extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text(restaurant.rating.toString()),
+                    Text(
+                      restaurant.rating.toString(),
+                      style: TextStyle(
+                        fontSize: width <= 320 ? 10 : 16,
+                      ),
+                    ),
                   ],
                 ),
               ],

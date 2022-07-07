@@ -28,6 +28,8 @@ class _AddReviewState extends State<AddReview> {
   void dispose() {
     _namefocusNode.dispose();
     _reviewfocusNode.dispose();
+    _nameController.dispose();
+    _reviewController.dispose();
     super.dispose();
   }
 

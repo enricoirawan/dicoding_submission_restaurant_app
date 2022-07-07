@@ -17,6 +17,8 @@ class RecommendedRestaurantItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsiveWidth = MediaQuery.of(context).size.width - 100;
+
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(
@@ -25,6 +27,7 @@ class RecommendedRestaurantItem extends StatelessWidget {
         );
       },
       child: Container(
+        width: responsiveWidth,
         margin: EdgeInsets.only(
           left: 16,
           right: index == total - 1 ? 16 : 0,

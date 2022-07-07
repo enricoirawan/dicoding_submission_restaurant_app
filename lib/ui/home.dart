@@ -18,6 +18,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final RestaurantBloc _restaurantBloc = getIt<RestaurantBloc>();
+    final responsiveHeight = MediaQuery.of(context).size.height;
 
     Widget _searchWidget() {
       return GestureDetector(
@@ -31,7 +32,7 @@ class HomeScreen extends StatelessWidget {
           _restaurantBloc.add(ClearRestaurant());
         },
         child: Container(
-          height: 60,
+          height: responsiveHeight < 540 ? 50 : 60,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -79,8 +80,10 @@ class HomeScreen extends StatelessWidget {
     }
 
     Widget _renderRecommendedRestaurants() {
+      final responsiveHeight = MediaQuery.of(context).size.width / 3;
+
       return SizedBox(
-        height: 130,
+        height: responsiveHeight,
         child: BlocBuilder<RestaurantBloc, RestaurantState>(
           builder: (BuildContext context, RestaurantState state) {
             if (state.status == Status.success) {
@@ -215,7 +218,7 @@ class HomeScreen extends StatelessWidget {
                     "Mau makan apa hari ini?",
                     style: Theme.of(context).textTheme.headline5!.copyWith(
                           color: Colors.white,
-                          fontSize: 27,
+                          fontSize: responsiveHeight < 540 ? 20 : 27,
                         ),
                   ),
                 ),
@@ -227,7 +230,7 @@ class HomeScreen extends StatelessWidget {
                     "Yuk cari makanan enak di restaurant!",
                     style: Theme.of(context).textTheme.headline5!.copyWith(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: responsiveHeight < 540 ? 18 : 20,
                         ),
                   ),
                 ),
@@ -235,7 +238,10 @@ class HomeScreen extends StatelessWidget {
                   left: 16,
                   right: 16,
                   top: 160,
-                  child: Hero(tag: searchTag, child: _searchWidget()),
+                  child: Hero(
+                    tag: searchTag,
+                    child: _searchWidget(),
+                  ),
                 ),
                 Positioned(
                   left: 0,

@@ -41,6 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void dispose() {
     _searchNode.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -97,6 +98,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         body: BlocBuilder<ConnectedBloc, ConnectedState>(
@@ -107,7 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
             return SingleChildScrollView(
               child: Container(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(width < 330 ? 0 : 8),
                 child: Column(
                   children: [
                     _searchBar(),
